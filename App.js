@@ -14,9 +14,11 @@ const values = new Array(100)
   });
 
 const App = () => {
-  const defaultValue = 100;
+  const defaultValue = 27;
 
-  const onChange = (value) => console.log('ON_CHANGE ', value);
+  const onChange = (value) => {
+    console.log('ON_CHANGE ', value)
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

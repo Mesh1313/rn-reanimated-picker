@@ -4,7 +4,8 @@ import Animated, {
   Extrapolate,
   useSharedValue,
   useAnimatedStyle,
-  interpolate
+  interpolate,
+  withTiming
 } from "react-native-reanimated";
 import MaskedView from "@react-native-community/masked-view";
 
@@ -99,13 +100,15 @@ const Picker = ({
   itemStyle,
   labelStyle
 }) => {
-  const defaultValueIdx = values.findIndex((v) => defaultValue === v.value) ?? 0;
   const allValues = [...EMPTY_ARR, ...values, ...EMPTY_ARR]
   const translateY = useSharedValue(0);
   const _itemHeight = itemHeight ?? ITEM_HEIGHT;
 
   useEffect(() => {
-    translateY.value = -defaultValueIdx * _itemHeight;
+    const idx = values.findIndex((v) => defaultValue === v.value);
+    const defaultIdx = idx === -1 ? 0 : idx;
+
+    translateY.value = withTiming(-defaultIdx * _itemHeight);
   }, [defaultValue]);
 
   const maskElementAnimatedStyles = useAnimatedStyle(() => (
