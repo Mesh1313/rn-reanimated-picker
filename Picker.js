@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, StyleSheet, Text, Dimensions } from "react-native";
 import Animated, {
   Extrapolate,
@@ -99,9 +99,14 @@ const Picker = ({
   itemStyle,
   labelStyle
 }) => {
+  const defaultValueIdx = values.findIndex((v) => defaultValue === v.value) ?? 0;
   const allValues = [...EMPTY_ARR, ...values, ...EMPTY_ARR]
   const translateY = useSharedValue(0);
-  const _itemHeight = itemHeight ?? ITEM_HEIGHT
+  const _itemHeight = itemHeight ?? ITEM_HEIGHT;
+
+  useEffect(() => {
+    translateY.value = -defaultValueIdx * _itemHeight;
+  }, [defaultValue]);
 
   const maskElementAnimatedStyles = useAnimatedStyle(() => (
     {
@@ -151,7 +156,6 @@ const Picker = ({
         value={translateY}
         onChange={onChange ?? (() => {})}
         itemHeight={_itemHeight}
-        {...{ defaultValue }}
       />
     </View>
   );

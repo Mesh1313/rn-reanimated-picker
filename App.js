@@ -14,7 +14,7 @@ const values = new Array(100)
   });
 
 const App = () => {
-  const defaultValue = 0;
+  const defaultValue = 100;
 
   const onChange = (value) => console.log('ON_CHANGE ', value);
 

@@ -11,7 +11,6 @@ import { snapPoint } from "react-native-redash";
 // interface GestureHandlerProps {
 //   value: Animated.Value<number>;
 //   max: number;
-//   defaultValue: number;
 // }
 
 const GestureHandler = ({ value, max, onChange, itemHeight }) => {
